@@ -8,14 +8,16 @@ import { GetOneUserController } from "./controllers/GetOneUserController";
 import { CreateUserController } from "./controllers/CreateUserController";
 import { MysqlUserRepository } from "./MysqlUserRepository";
 import { Bcrypt } from "./servicesBcrypt/Bcrypt";
+import { NodeMailerService } from "./servicesEmail/NodeMailer";
 
 const mysqlUsertRepository = new MysqlUserRepository();
 const bcrypt = new Bcrypt();
+const nodeMailer = new NodeMailerService();
 
 const putUserUseCase = new PutUserUseCase(mysqlUsertRepository);
 const getAllUserUseCase = new GetAllUserUseCase(mysqlUsertRepository);
 const getOneUserUseCase = new GetOneUserUseCase(mysqlUsertRepository, bcrypt);
-const createUserUseCase = new CreateUserUseCase(mysqlUsertRepository, bcrypt);
+const createUserUseCase = new CreateUserUseCase(mysqlUsertRepository, bcrypt, nodeMailer);
 
 export const putUserController = new PutUserController(putUserUseCase);
 export const getAllUserController = new GetAllUserController(getAllUserUseCase);
