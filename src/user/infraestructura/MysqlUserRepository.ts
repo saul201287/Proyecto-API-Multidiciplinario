@@ -33,7 +33,8 @@ export class MysqlUserRepository implements UserRepository {
     apellidoM: string,
     email: string,
     username: string,
-    password: string
+    password: string,
+    token:string | null
   ): Promise<User | null> {
     const sql =
       "INSERT INTO users (nombre,apellidoP, apellidoM, email, username, password) VALUES (?, ?, ?, ?, ?,?)";

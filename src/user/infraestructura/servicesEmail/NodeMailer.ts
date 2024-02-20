@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
-import { NodeMailer } from "../../domain/services/NodeMailer";
+import { INodeMailer } from "../../domain/services/NodeMailer";
 
-export class NodeMailerService implements NodeMailer {
+export class NodeMailerService implements INodeMailer {
   async sendMail(email: string, name: string): Promise<boolean> {
     try {
       const info = await transporter.sendMail({
@@ -14,9 +14,8 @@ export class NodeMailerService implements NodeMailer {
       });
       if (info) {
         console.log("email enviado");
-      }else{
+      } else {
         console.log("hubo un problema al enviar el email");
-        
       }
     } catch (error) {
       console.log(error);

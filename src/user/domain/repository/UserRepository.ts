@@ -8,7 +8,8 @@ export interface UserRepository {
     apellidoM: string,
     email: string,
     username: string,
-    newPassword: string
+    newPassword: string,
+    token: string | null
   ): Promise<User | null>;
   getOne(username: string, password: string): Promise<User[] | null>;
   putUser(username: string, newPassword: string): Promise<User[] | null>;

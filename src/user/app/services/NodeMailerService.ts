@@ -1,7 +1,7 @@
-import { NodeMailer } from "../../domain/services/NodeMailer";
+import { INodeMailer } from "../../domain/services/NodeMailer";
 
 export class NodeMailerService {
-  constructor(readonly nodeMailer: NodeMailer) {}
+  constructor(readonly nodeMailer: INodeMailer) {}
   async run(email: string, name: string): Promise<boolean> {
     try {
       const notification = await this.nodeMailer.sendMail(email, name);

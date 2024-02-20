@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { CreateUserUseCase } from "../../app/CreateUserUseCase";
 
+
 export class CreateUserController {
   constructor(readonly createUserUseCase: CreateUserUseCase) {}
 
@@ -14,11 +15,14 @@ export class CreateUserController {
         data.apellidoM,
         data.username,
         data.email,
-        data.password
+        data.password,
+        data.token
       );
+      console.log(user);
+      
       if (user)
       
-        res.status(201).send({
+        res.status(201).header("token",data.token).send({
           status: "success",
           data: {
             id: user?.id,
