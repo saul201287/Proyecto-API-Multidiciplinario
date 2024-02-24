@@ -1,4 +1,4 @@
-import { INodeMailer } from "../../domain/services/NodeMailer";
+import { INodeMailer } from "../../domain/services/INodeMailer";
 
 export class NodeMailerService {
   constructor(readonly nodeMailer: INodeMailer) {}

@@ -1,7 +1,7 @@
 import { compare, hash } from "bcryptjs";
-import { IBcryptOptions } from "../../domain/services/Bcrypt";
+import { IEncryptServices } from "../../app/services/IEncryptServices";
 
-export class Bcrypt implements IBcryptOptions {
+export class EncriptServices implements IEncryptServices {
   async encodePassword(password: string): Promise<string> {
     const newPassword = await hash(password,Number(process.env.SECRET_JUMP));
     return newPassword;

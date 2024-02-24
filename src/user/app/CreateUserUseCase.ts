@@ -1,15 +1,15 @@
 import { User } from "../domain/entities/User";
 import { UserRepository } from "../domain/repository/UserRepository";
-import { IBcryptOptions } from "../domain/services/Bcrypt";
-import { INodeMailer } from "../domain/services/NodeMailer";
-import { IWebToken } from "../domain/services/WebTokens";
+import { IEncryptServices } from "./services/IEncryptServices";
+import { INodeMailer } from "../domain/services/INodeMailer";
+import { WebTokenService } from "./services/WebTokensServices";
 
 export class CreateUserUseCase {
   constructor(
     readonly userRepository: UserRepository,
-    readonly options: IBcryptOptions,
+    readonly options: IEncryptServices,
     readonly nodeMailer: INodeMailer,
-    readonly webToken: IWebToken
+    readonly webToken: WebTokenService
   ) {}
 
   async run(
@@ -25,12 +25,12 @@ export class CreateUserUseCase {
       const newPassword = await this.options.encodePassword(password);
       //await this.nodeMailer.sendMail(email, nombre);
      
-      let tokenNew = await this.webToken.singToken(
+      let tokenNew = await this.webToken.run(
         nombre,
         String(process.env.SECRET_TOKEN),
         100 * 100
       );
-      console.log(tokenNew);
+      console.log(tokenNew + "44");
       
       const user: any = await this.userRepository.createUser(
         nombre,

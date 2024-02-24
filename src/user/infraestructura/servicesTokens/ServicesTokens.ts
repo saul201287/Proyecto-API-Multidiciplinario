@@ -1,7 +1,7 @@
 import {sign} from "jsonwebtoken"
-import { IWebToken } from "../../domain/services/WebTokens"
+import { IWebToken } from "../../domain/services/IWebTokens"
 
-export class WebTokensService implements IWebToken{
+export class TokensServis implements IWebToken{
     async  singToken(id: string, secret: string, expiresIn: number): Promise<string | null> {
         try {
             const token = sign(id, secret || "seguridad")    

@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { INodeMailer } from "../../domain/services/NodeMailer";
+import { INodeMailer } from "../../domain/services/INodeMailer";
 
 export class NodeMailerService implements INodeMailer {
   async sendMail(email: string, name: string): Promise<boolean> {

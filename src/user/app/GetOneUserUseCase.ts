@@ -1,6 +1,6 @@
 import { User } from "../domain/entities/User";
 import { UserRepository } from "../domain/repository/UserRepository";
-import { IBcryptOptions } from "../domain/services/Bcrypt";
+import { IBcryptOptions } from "./services/IEncryptServices";
 
 export class GetOneUserUseCase {
   constructor(
