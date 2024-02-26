@@ -1,4 +1,4 @@
 import { User } from "../entities/User";
-export interface INotificationNewProduct{
+export interface INotificationNewUser{
     sendNotification(user: User): Promise<boolean> ;
 }

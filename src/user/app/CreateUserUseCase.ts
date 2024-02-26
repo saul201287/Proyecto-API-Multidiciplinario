@@ -1,47 +1,53 @@
 import { User } from "../domain/entities/User";
 import { UserRepository } from "../domain/repository/UserRepository";
 import { IEncryptServices } from "./services/IEncryptServices";
-import { INodeMailer } from "../domain/services/INodeMailer";
-import { WebTokenService } from "./services/WebTokensServices";
+import { ServicesEmailUser } from "./services/ServicesEmailUser";
+import { ServicesTokensUser} from "./services/ServicesTokensUser";
+import { ICreateId } from "./services/ICreateId";
 
 export class CreateUserUseCase {
   constructor(
     readonly userRepository: UserRepository,
     readonly options: IEncryptServices,
-    readonly nodeMailer: INodeMailer,
-    readonly webToken: WebTokenService
+    readonly nodeMailer: ServicesEmailUser,
+    readonly webToken: ServicesTokensUser,
+    readonly createId: ICreateId,
   ) {}
 
   async run(
+    id: string,
     nombre: string,
     apellidoP: string,
     apellidoM: string,
     username: string,
     email: string,
-    password: string,
-    token: string | null
-  ): Promise<User | null> {
+    password: string
+  ): Promise<{user:User, token: string} | null> {
     try {
       const newPassword = await this.options.encodePassword(password);
-      //await this.nodeMailer.sendMail(email, nombre);
-     
+      id =  this.createId.asignarId()
+      //await this.nodeMailer.sendMail(email, nombre);     
       let tokenNew = await this.webToken.run(
         nombre,
         String(process.env.SECRET_TOKEN),
         100 * 100
       );
-      console.log(tokenNew + "44");
+      console.log(tokenNew);
       
       const user: any = await this.userRepository.createUser(
+        id,
         nombre,
         apellidoP,
         apellidoM,
         email,
         username,
         newPassword,
-        tokenNew,
       );
-      if (user) return user;
+      const data: any = {
+        user: user,
+        token: tokenNew
+      }
+      if (user) return data;
 
       return null;
     } catch (error) {

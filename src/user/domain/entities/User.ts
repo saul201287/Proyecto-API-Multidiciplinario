@@ -1,6 +1,6 @@
 export class User{
     constructor(
-      readonly id: number,
+      readonly id: string,
       readonly nombre: string,
       readonly apellidoP: string,
       readonly apellidoM: string,

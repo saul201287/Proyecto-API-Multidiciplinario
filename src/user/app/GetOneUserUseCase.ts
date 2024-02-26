@@ -1,11 +1,11 @@
 import { User } from "../domain/entities/User";
 import { UserRepository } from "../domain/repository/UserRepository";
-import { IBcryptOptions } from "./services/IEncryptServices";
+import { IEncryptServices } from "./services/IEncryptServices";
 
 export class GetOneUserUseCase {
   constructor(
     readonly userRepository: UserRepository,
-    readonly options: IBcryptOptions
+    readonly options: IEncryptServices
   ) {}
 
   async run(username: string, password: string): Promise<User[] | null> {

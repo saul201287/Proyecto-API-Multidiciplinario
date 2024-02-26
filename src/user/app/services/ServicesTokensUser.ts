@@ -1,7 +1,7 @@
-import { IWebToken } from "../../domain/services/IWebTokens";
+import { ServicesTokens } from "../../infraestructura/servicesTokens/ServicesTokens";
 
-export class WebTokenService {
-  constructor(readonly webToken: IWebToken) {}
+export class ServicesTokensUser {
+  constructor(readonly webToken: ServicesTokens) {}
   async run(id: string, secret: string, expiresIn: number): Promise<string | null>{
     try {
       const token = await this.webToken.singToken(id, secret, expiresIn);

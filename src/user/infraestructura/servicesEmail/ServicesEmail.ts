@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
-import { INodeMailer } from "../../domain/services/INodeMailer";
+import { IServicesEmail } from "../../domain/services/IServicesEmails";
 
-export class NodeMailerService implements INodeMailer {
+export class ServicesEmail implements IServicesEmail {
   async sendMail(email: string, name: string): Promise<boolean> {
     try {
       const info = await transporter.sendMail({

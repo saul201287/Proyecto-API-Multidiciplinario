@@ -9,29 +9,29 @@ export class CreateUserController {
     const data = req.body;
     
     try {
-      const user = await this.createUserUseCase.run(
+      const user : any = await this.createUserUseCase.run(
+        data.id,
         data.nombre,
         data.apellidoP,
         data.apellidoM,
         data.username,
         data.email,
-        data.password,
-        data.token
+        data.password
       );
-      console.log(user);
+      console.log(user.user);
       
       if (user)
       
         res.status(201).header("token",data.token).send({
           status: "success",
           data: {
-            id: user?.id,
-            nombre: user?.nombre,
-            apellidoP: user?.apellidoP,
-            apellidoM: user?.apellidoM,
-            username: user?.username,
-            email: user?.email,
-            password: user?.password
+            id: user?.user.id,
+            nombre: user?.user.nombre,
+            apellidoP: user?.user.apellidoP,
+            apellidoM: user?.user.apellidoM,
+            username: user?.user.username,
+            email: user?.user.email,
+            password: user?.user.password
           },
         });
       else

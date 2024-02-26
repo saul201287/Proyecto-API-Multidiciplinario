@@ -28,17 +28,18 @@ export class MysqlUserRepository implements UserRepository {
   }
 
   async createUser(
+    id: string,
     nombre: string,
     apellidoP: string,
     apellidoM: string,
     email: string,
     username: string,
-    password: string,
-    token:string | null
-  ): Promise<User | null> {
+    password: string
+  ): Promise<{user:User, token:string} | null> {    
     const sql =
-      "INSERT INTO users (nombre,apellidoP, apellidoM, email, username, password) VALUES (?, ?, ?, ?, ?,?)";
+      "INSERT INTO users (id,nombre,apellidoP, apellidoM, email, username, password) VALUES (?, ?, ?, ?, ?, ?,?)";
     const params: any[] = [
+      id,
       nombre,
       apellidoP,
       apellidoM,
@@ -48,15 +49,16 @@ export class MysqlUserRepository implements UserRepository {
     ];
     try {
       const [result]: any = await query(sql, params);
-      return new User(
-        result.insertId,
+      const user: any = new User(
+        id,
         nombre,
         apellidoP,
         apellidoM,
         email,
         username,
         password
-      );
+      )
+      return user;
     } catch (error) {
       console.log(error);
       return null;
