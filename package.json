@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "dev": "ts-node-dev ./src/server.ts"
+    "dev": "tsnd --respawn --clear ./src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +31,7 @@
     "mysql2": "^3.9.1",
     "nodemailer": "^6.9.9",
     "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

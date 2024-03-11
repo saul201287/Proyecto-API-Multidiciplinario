@@ -26,7 +26,7 @@ export class CreateUserUseCase {
     try {
       const newPassword = await this.options.encodePassword(password);
       id =  this.createId.asignarId()
-      //await this.nodeMailer.sendMail(email, nombre);     
+      await this.nodeMailer.run(email, nombre);     
       let tokenNew = await this.webToken.run(
         nombre,
         String(process.env.SECRET_TOKEN),
