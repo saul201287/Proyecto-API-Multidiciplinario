@@ -9,7 +9,7 @@ export class ServicesEmail implements IServicesEmail {
         to: email,
         subject: `Bienvenido ${name} 🎈🎈🎈`,
         html: `
-        <b>Ten por seguro que con nosotros la seguridad de tu bicicleta es de cofiar y fiar 😉.</b><br /> 
+        <b>Ten por seguro que con nosotros la seguridad de tu bicicleta es de confiar y fiar 😉.</b><br /> 
         <b>Gracias por usar nuestra aplicación y tener confíanza en nosotros</b>`,
       });
       if (info) {
