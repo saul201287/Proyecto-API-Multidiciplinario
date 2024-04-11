@@ -1,16 +1,12 @@
-import { User } from "../domain/entities/User";
-import { UserRepository } from "../domain/repository/UserRepository";
+import { User } from "../domain/User";
+import { UserRepository } from "../domain/UserRepository";
 import { IEncryptServices } from "./services/IEncryptServices";
-import { ServicesEmailUser } from "./services/ServicesEmailUser";
-import { ServicesTokensUser} from "./services/ServicesTokensUser";
 import { ICreateId } from "./services/ICreateId";
 
 export class CreateUserUseCase {
   constructor(
     readonly userRepository: UserRepository,
     readonly options: IEncryptServices,
-    readonly nodeMailer: ServicesEmailUser,
-    readonly webToken: ServicesTokensUser,
     readonly createId: ICreateId,
   ) {}
 
@@ -26,13 +22,7 @@ export class CreateUserUseCase {
     try {
       const newPassword = await this.options.encodePassword(password);
       id =  this.createId.asignarId()
-      await this.nodeMailer.run(email, nombre);     
-      let tokenNew = await this.webToken.run(
-        nombre,
-        String(process.env.SECRET_TOKEN),
-        100 * 100
-      );
-      console.log(tokenNew);
+      
       
       const user: any = await this.userRepository.createUser(
         id,
@@ -43,11 +33,8 @@ export class CreateUserUseCase {
         username,
         newPassword,
       );
-      const data: any = {
-        user: user,
-        token: tokenNew
-      }
-      if (user) return data;
+     
+      if (user) return user;
 
       return null;
     } catch (error) {

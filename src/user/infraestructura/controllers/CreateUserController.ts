@@ -18,20 +18,20 @@ export class CreateUserController {
         data.email,
         data.password
       );
-      console.log(user.user);
+      console.log(user);
       
       if (user)
       
-        res.status(201).header("token",data.token).send({
+        res.status(201).send({
           status: "success",
           data: {
-            id: user?.user.id,
-            nombre: user?.user.nombre,
-            apellidoP: user?.user.apellidoP,
-            apellidoM: user?.user.apellidoM,
-            username: user?.user.username,
-            email: user?.user.email,
-            password: user?.user.password
+            id: user?.id,
+            nombre: user?.nombre,
+            apellidoP: user?.apellidoP,
+            apellidoM: user?.apellidoM,
+            username: user?.username,
+            email: user?.email,
+            password: user?.password
           },
         });
       else
