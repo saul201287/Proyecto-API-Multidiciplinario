@@ -4,6 +4,7 @@ import { Signale } from "signale";
 import * as dotenv from "dotenv";
 import helmet from "helmet";
 import { userRouter } from "./user/infraestructura/UserRouter";
+import { productRouter } from "./product/infraestructure/ProductRouter";
 
 const app = express();
 app.use(helmet.hidePoweredBy());
@@ -11,6 +12,7 @@ dotenv.config();
 app.use(morgan("dev"));
 app.use(express.json());
 app.use("/user", userRouter);
+app.use("/product",productRouter)
 
 const options = {
   secrets: ["([0-9]{4}-?)+"],
